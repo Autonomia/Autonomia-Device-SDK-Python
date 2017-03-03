@@ -16,8 +16,8 @@ The library is also used to send asynchronous event data messages upstream to th
 ## Installation
 To install the `autonomialib` Python module, clone or download and unzip this repo, and from the Autonomia-SDK-Python directory run:
 
-| Raspberry PI              | Arch                      |
-| ------------------------- |---------------------------|
+| Raspberry PI              | Arch Linux                |
+|:--------------------------|:--------------------------|
 | `python setup.py install` | `python setup.py install` |
 
 ## Setup
