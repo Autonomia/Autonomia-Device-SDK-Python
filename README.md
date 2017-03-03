@@ -15,9 +15,10 @@ After instantiating an AutonomiaClient object the `attach` method connects the v
 The library is also used to send asynchronous event data messages upstream to the Autonomia server, telemetry for instance. The telemetry messages are propagated by the Autonomia cloud server to all open WebSockets endpoints and are relayed to the real-time analytics pipeline.
 ## Installation
 To install the `autonomialib` Python module, clone or download and unzip this repo, and from the Autonomia-SDK-Python directory run:
-```
-$ python setup.py install
-```
+| Raspberry PI              | Arch                      |
+|---                        |---                        |
+| `python setup.py install` | `python setup.py install` |
+
 ## Setup
 
 Use of the library in a vehicle application require an `APPLICATION_KEY` to authenticate a vehicle connecting to the Autonomia Cloud and to associate it with the Application.
