@@ -17,8 +17,10 @@ The library is also used to send asynchronous event data messages upstream to th
 To install the `autonomialib` Python module, clone or download and unzip this repo, and from the Autonomia-SDK-Python directory run:
 
 
-|:----                      
-| `python setup.py install` |
+          
+```
+python setup.py install
+```
 
 
 
