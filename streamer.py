@@ -28,7 +28,7 @@ import hmac
 def buildKey(mac, secret):
     """Return the camera streaming key."""
     h = hmac.new(secret, mac, digestmod=hashlib.sha256).hexdigest()
-    return mac + '-' + h[0:32]
+    return mac + ':' + h[0:32]
 
 def isRPIcamera():
   ret = False
@@ -76,7 +76,7 @@ def rpi_cam_start(device_id, application_key, timestamp):
     params = ['ffmpeg', '-r','30', '-use_wallclock_as_timestamps', '1', '-thread_queue_size', '512', '-f', 'h264', '-i', '-', '-vcodec', 'copy', '-g', '30', '-strict', 'experimental']
     server = 'stream.vederly.com:12345'
     key = buildKey(device_id, application_key)
-    url = 'rtmp://' + server + '/src/' + key
+    url = 'rtmp://' + server + '/src/' + key + ':1'
     params = params + ['-threads', '4', '-f', 'flv', url]
 
     process = subprocess.Popen(params, stdin=raspivid_pid.stdout, stderr=FNULL)
@@ -88,7 +88,7 @@ def rpi_cam_start(device_id, application_key, timestamp):
     params = ['ffmpeg', '-r','30', '-use_wallclock_as_timestamps', '1', '-thread_queue_size', '512', '-f', 'h264', '-i', '-', '-vcodec', 'h264', '-g', '30', '-strict', 'experimental']
     server = 'stream.vederly.com:12345'
     key = buildKey(device_id, application_key)
-    url = 'rtmp://' + server + '/src/' + key
+    url = 'rtmp://' + server + '/src/' + key + ':1'
     format = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf: text='%{localtime}':x=0:y=(h-th-2): fontsize=24: fontcolor=white: box=1: boxcolor=black@0.9"
     params = params + ['-vf', format, '-threads', '4', '-f', 'flv', url]
 
