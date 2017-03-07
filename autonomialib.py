@@ -174,7 +174,7 @@ class AutonomiaClient(object):
     info = fcntl.ioctl(s.fileno(), 0x8927, struct.pack('256s', ifname[:15]))
     return ''.join(['%02X' % ord(char) for char in info[18:24]])
 
-  def attach(self, rpc_methods, device_id=get_mac(), device_info="Automomia-Vehicle"):
+  def attach(self, rpc_methods, device_id=get_mac(), device_info="ROV"):
     """
     Attach the specified device to the Autonomia cloud server. 
     Authentication is done using only the application_id (one-way authentication).
