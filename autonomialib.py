@@ -169,9 +169,17 @@ class AutonomiaClient(object):
       from uuid import getnode
       return getnode()
     # proper MAC on Linux
-    ifname = 'eth0'
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    info = fcntl.ioctl(s.fileno(), 0x8927, struct.pack('256s', ifname[:15]))
+    # try Ethrnet first
+    try:
+      ifname = 'eth0'
+      s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+      info = fcntl.ioctl(s.fileno(), 0x8927, struct.pack('256s', ifname[:15]))
+    except Exception, e:
+      # try WiFi
+      ifname = 'wlan0'
+      s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+      info = fcntl.ioctl(s.fileno(), 0x8927, struct.pack('256s', ifname[:15]))
+
     return ''.join(['%02X' % ord(char) for char in info[18:24]])
 
   def attach(self, rpc_methods, device_id=get_mac(), device_info="ROV"):
