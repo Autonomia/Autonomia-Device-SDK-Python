@@ -71,7 +71,7 @@ def rpi_cam_start(device_id, application_key, timestamp):
 
   if not timestamp:
     # raspivid 
-    params = ['raspivid', '-o', '-', '-t', '0', '-vf', '-hf', '-w', '1280', '-h', '720', '-fps', '30', '-b', '1000000', '-t', '5000']
+    params = ['raspivid', '-o', '-', '-t', '0',  '-vf', '-w', '1280', '-h', '720', '-fps', '30', '-b', '1000000', '-t', '5000']
     # params = ['raspivid', '-o', '-', '-t', '0', '-vf', '-hf', '-w', '1920', '-h', '1080', '-fps', '30', '-b', '2000000', '-t', '5000']
     raspivid_pid = subprocess.Popen(params, stdout=subprocess.PIPE)
     params = ['ffmpeg', '-r','30', '-use_wallclock_as_timestamps', '1', '-thread_queue_size', '512', '-f', 'h264', '-i', '-', '-vcodec', 'copy', '-g', '30', '-strict', 'experimental']
@@ -84,7 +84,8 @@ def rpi_cam_start(device_id, application_key, timestamp):
     raspivid_pid.stdout.close()  
   else:
     # raspivid 
-    params = ['raspivid', '-o', '-', '-t', '0', '-vf', '-hf', '-w', '1280', '-h', '720', '-fps', '30', '-b', '2000000', '-t', '5000']
+    #params = ['raspivid', '-o', '-', '-t', '0', '-vf', '-hf', '-w', '1280', '-h', '720', '-fps', '30', '-b', '2000000', '-t', '5000']
+    params = ['raspivid', '-o', '-', '-t', '0', '-vf', '-w', '1280', '-h', '720', '-fps', '30', '-b', '2000000', '-t', '5000']
     raspivid_pid = subprocess.Popen(params, stdout=subprocess.PIPE)
     params = ['ffmpeg', '-r','30', '-use_wallclock_as_timestamps', '1', '-thread_queue_size', '512', '-f', 'h264', '-i', '-', '-vcodec', 'h264', '-g', '30', '-strict', 'experimental']
     server = 'stream.vederly.com:12345'
