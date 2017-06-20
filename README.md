@@ -11,6 +11,7 @@ The library is also used to send asynchronous event data messages upstream to th
 
 
 # ![](https://storage.googleapis.com/material-icons/external-assets/v4/icons/svg/ic_phonelink_setup_black_24px.svg) Setup `autonomialib` Python module
+- `sudo apt-get install python-dev libxml2-dev libxslt-dev`
 - `git clone https://github.com/Autonomia/Autonomia-Device-SDK-Python.git`
 - `Autonomia-Device-SDK-Python` 
 - `sudo python setup.py install`
