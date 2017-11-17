@@ -129,14 +129,14 @@ def video_start(serial, app_key, timestamp=True):
     # streaming video with timestamp -- to increase actual fps increase or remove maxrate and bufsize
     params = [pname, '-r','30', '-use_wallclock_as_timestamps', '1', '-thread_queue_size', '512', '-f', 'v4l2', '-i', camera,'-maxrate', '768k', '-bufsize', '960k']
     format = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf: text='%{localtime}':x=0:y=(h-th-2): fontsize=24: fontcolor=white: box=1: boxcolor=black@0.9"
-    url = 'rtmp://' + server + '/src/' + key
+    url = 'rtmp://' + server + '/src/' + key + ':1'
     params = params + ['-vf', format, '-threads', '4', '-r', '30', '-g', '60', '-f', 'flv', url]
     # spawn a process and do not wait
     pid = subprocess.Popen(params, stderr=FNULL)
   else:
     # streaming video 
     params = [pname, '-r','30', '-use_wallclock_as_timestamps', '1', '-thread_queue_size', '512', '-f', 'v4l2', '-i', camera, '-maxrate', '768k', '-bufsize', '960k']
-    url = 'rtmp://' + server + '/src/' + key
+    url = 'rtmp://' + server + '/src/' + key + ':1'
     params = params + ['-threads', '4', '-r', '30', '-g', '60', '-f', 'flv', url]
     # spawn a process and do not wait
     pid = subprocess.Popen(params, stderr=FNULL)
