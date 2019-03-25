@@ -33,7 +33,7 @@ from http_parser.parser import HttpParser
 import streamer
 
 #------------------ TODO: move to autonomia.io
-AUTONOMIA_SERVER='cometa.vederly.com'
+AUTONOMIA_SERVER='cometa.autonomia.io'
 
 def message_handler(msg, msg_len):
   """

@@ -75,7 +75,7 @@ def rpi_cam_start(device_id, application_key, timestamp):
     # params = ['raspivid', '-o', '-', '-t', '0', '-vf', '-hf', '-w', '1920', '-h', '1080', '-fps', '30', '-b', '2000000', '-t', '5000']
     raspivid_pid = subprocess.Popen(params, stdout=subprocess.PIPE)
     params = ['ffmpeg', '-r','30', '-use_wallclock_as_timestamps', '1', '-thread_queue_size', '512', '-f', 'h264', '-i', '-', '-vcodec', 'copy', '-g', '30', '-strict', 'experimental']
-    server = 'stream.vederly.com:12345'
+    server = 'stream.autonomia.io:12345'
     key = buildKey(device_id, application_key)
     url = 'rtmp://' + server + '/src/' + key + ':1'
     params = params + ['-threads', '4', '-f', 'flv', url]
@@ -88,7 +88,7 @@ def rpi_cam_start(device_id, application_key, timestamp):
     params = ['raspivid', '-o', '-', '-t', '0', '-vf', '-w', '1280', '-h', '720', '-fps', '30', '-b', '2000000', '-t', '5000']
     raspivid_pid = subprocess.Popen(params, stdout=subprocess.PIPE)
     params = ['ffmpeg', '-r','30', '-use_wallclock_as_timestamps', '1', '-thread_queue_size', '512', '-f', 'h264', '-i', '-', '-vcodec', 'h264', '-g', '30', '-strict', 'experimental']
-    server = 'stream.vederly.com:12345'
+    server = 'stream.autonomia.io:12345'
     key = buildKey(device_id, application_key)
     url = 'rtmp://' + server + '/src/' + key + ':1'
     format = "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf: text='%{localtime}':x=0:y=(h-th-2): fontsize=24: fontcolor=white: box=1: boxcolor=black@0.9"
@@ -97,7 +97,7 @@ def rpi_cam_start(device_id, application_key, timestamp):
     process = subprocess.Popen(params, stdin=raspivid_pid.stdout, stderr=FNULL)
     raspivid_pid.stdout.close()
   return raspivid_pid, url     
-  #raspivid -o - -t 0 -vf -hf -fps 30 -w 1280 -h 720 -b 2000000 | ffmpeg -r 30 -use_wallclock_as_timestamps 1 -f h264 -i - -vcodec copy -g 30 -strict experimental -f flv rtmp://stream.vederly.com:12345/src/7777
+  #raspivid -o - -t 0 -vf -hf -fps 30 -w 1280 -h 720 -b 2000000 | ffmpeg -r 30 -use_wallclock_as_timestamps 1 -f h264 -i - -vcodec copy -g 30 -strict experimental -f flv rtmp://stream.autonomia.io:12345/src/7777
 
 def video_start(serial, app_key, timestamp=True):
   """ Start a video streamer """ 
@@ -120,7 +120,7 @@ def video_start(serial, app_key, timestamp=True):
 
   pname = 'ffmpeg'
   vcodec = 'h264'
-  server = 'stream.vederly.com:12345'
+  server = 'stream.autonomia.io:12345'
   key = buildKey(serial, app_key)
   # to suppress output when running the streamer
   FNULL = open(os.devnull, 'w')
@@ -141,4 +141,4 @@ def video_start(serial, app_key, timestamp=True):
     # spawn a process and do not wait
     pid = subprocess.Popen(params, stderr=FNULL)
   return pid, url
-  # ffmpeg -r 30 -use_wallclock_as_timestamps 1 -thread_queue_size 512 -f v4l2 -i  /dev/video0 -vb 2000k -vf "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:text='%{localtime}': x=0: y=(h-th-2): fontsize=24: fontcolor=white: box=1: boxcolor=black"  -threads 4 -r 30 -g 30 -f flv rtmp://stream.vederly.com:12345/src/B8AEED7340ED-6e0d2b1002b502ca1cac3c7862a9040f^C
+  # ffmpeg -r 30 -use_wallclock_as_timestamps 1 -thread_queue_size 512 -f v4l2 -i  /dev/video0 -vb 2000k -vf "drawtext=fontfile=/usr/share/fonts/truetype/freefont/FreeSans.ttf:text='%{localtime}': x=0: y=(h-th-2): fontsize=24: fontcolor=white: box=1: boxcolor=black"  -threads 4 -r 30 -g 30 -f flv rtmp://stream.autonomia.io:12345/src/B8AEED7340ED-6e0d2b1002b502ca1cac3c7862a9040f^C
