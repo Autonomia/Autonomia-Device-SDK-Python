@@ -1,0 +1,8 @@
+autonomialib.py
+setup.py
+streamer.py
+autonomia.egg-info/PKG-INFO
+autonomia.egg-info/SOURCES.txt
+autonomia.egg-info/dependency_links.txt
+autonomia.egg-info/requires.txt
+autonomia.egg-info/top_level.txt
